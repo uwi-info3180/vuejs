@@ -20,6 +20,13 @@
             <p>{{ message }}</p>
             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMovieModal">Add a Movie</button>
         </section>
+
+        <transition name="fade">
+            <div v-if="displayFlash" v-bind:class="[isSuccess ? alertSuccessClass : alertErrorClass]" class="alert">
+                {{ flashMessage }}
+            </div>
+        </transition>
+
         <section class="movies">
             <div v-for="(movie, index) in movies" class="card">
                 <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">

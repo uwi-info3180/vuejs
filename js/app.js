@@ -4,6 +4,11 @@ let app = new Vue({
     el: '#app',
     data: {
       message: 'Hello Vue!',
+      flashMessage: '',
+      displayFlash: false,
+      isSuccess: false,
+      alertSuccessClass: 'alert-success',
+      alertErrorClass: 'alert-danger',
       movies: [
             {
                 title: 'Test',
@@ -39,10 +44,29 @@ let app = new Vue({
             this.movieTitle = '';
             this.movieDescription = '';
             this.movieRating = 1;
+            
+            this.displayFlash = true;
+            this.isSuccess = true;
+            this.flashMessage = 'Movie added successfully!';
             $('#addMovieModal').modal('hide');
+
+            let self = this;
+            setTimeout(function() { 
+                self.displayFlash = false; 
+                // console.log(self.displayFlash);
+            }, 3000);
         },
         removeMovie: function(index) {
+            this.displayFlash = true;
+            this.isSuccess = false;
+            this.flashMessage = 'Movie deleted!';
             this.movies.splice(index, 1);
+
+            let self = this;
+            setTimeout(function() { 
+                self.displayFlash = false; 
+                // console.log(self.displayFlash);
+            }, 3000);
         }
     }
 });
