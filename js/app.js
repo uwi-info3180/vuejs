@@ -27,14 +27,14 @@ let app = new Vue({
     },
     methods: {
         addMovie: function() {
-            console.log('clicked')
+            // console.log('clicked')
 
             let movie = {
                 title: this.movieTitle,
                 description: this.movieDescription,
                 rating: this.movieRating
             };
-            console.log(movie);
+            // console.log(movie);
             this.movies.push(movie);
             this.movieTitle = '';
             this.movieDescription = '';
