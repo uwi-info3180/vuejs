@@ -36,6 +36,9 @@ let app = new Vue({
             };
             console.log(movie);
             this.movies.push(movie);
+            this.movieTitle = '';
+            this.movieDescription = '';
+            this.movieRating = 1;
             $('#addMovieModal').modal('hide');
         },
         removeMovie: function() {
