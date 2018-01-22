@@ -21,18 +21,14 @@
             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMovieModal">Add a Movie</button>
         </section>
         <section class="movies">
-            <div class="row">
-                <div v-for="movie in movies" class="col-md-4">
-                    <div class="card">
-                        <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ movie.title }}</h5>
-                            <p class="card-text">{{ movie.description }}</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Rating: {{ movie.rating }}
-                        </div>
-                    </div>
+            <div v-for="movie in movies" class="card">
+                <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.title }}</h5>
+                    <p class="card-text">{{ movie.description }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Rating: {{ movie.rating }}
                 </div>
             </div>
         </section>
