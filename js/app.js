@@ -41,8 +41,8 @@ let app = new Vue({
             this.movieRating = 1;
             $('#addMovieModal').modal('hide');
         },
-        removeMovie: function() {
-
+        removeMovie: function(index) {
+            this.movies.splice(index, 1);
         }
     }
 });

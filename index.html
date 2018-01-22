@@ -21,14 +21,15 @@
             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMovieModal">Add a Movie</button>
         </section>
         <section class="movies">
-            <div v-for="movie in movies" class="card">
+            <div v-for="(movie, index) in movies" class="card">
                 <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
                     <p class="card-text">{{ movie.description }}</p>
+                    <p class="card-text">Rating: {{ movie.rating }} {{ (movie.rating > 1) ? 'stars' : 'star' }}</p>
                 </div>
                 <div class="card-footer text-muted">
-                    Rating: {{ movie.rating }}
+                    <button @click="removeMovie(index)" class="btn btn-danger btn-sm text-right">Remove</button>
                 </div>
             </div>
         </section>
