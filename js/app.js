@@ -11,19 +11,19 @@ let app = new Vue({
       alertErrorClass: 'alert-danger',
       movies: [
             {
-                title: 'Test',
-                description: 'This is a bad movie',
-                rating: 1
+                title: 'The Lord of the Rings: The Fellowship of the Ring',
+                description: 'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.',
+                rating: 5
             },
             {
-                title: 'Test 2',
-                description: 'This is a cool movie',
+                title: 'The Bourne Identity',
+                description: 'A man is picked up by a fishing boat, bullet-riddled and suffering from amnesia, before racing to elude assassins and regain his memory.',
                 rating: 4
             },
             {
-                title: 'Test 3',
-                description: 'This movie is just okay',
-                rating: 3
+                title: 'Wonder Woman',
+                description: 'When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.',
+                rating: 5
             },            
       ],
       movieTitle: '',
