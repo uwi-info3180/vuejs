@@ -18,7 +18,7 @@
         <section class="jumbotron text-center">
             <h1>Movie Time</h1>
             <p>{{ message }}</p>
-            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addMovieModal">Add a Movie</button>
+            <button class="btn btn-primary btn-lg" @click="disableEditing" data-toggle="modal" data-target="#addMovieModal">Add a Movie</button>
         </section>
 
         <transition name="fade">
@@ -28,6 +28,9 @@
         </transition>
 
         <section class="movies">
+            <div v-if="!movies.length" class="no-movies">
+                You haven't added any movies.
+            </div>
             <div v-for="(movie, index) in movies" class="card">
                 <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">
                 <div class="card-body">
@@ -35,8 +38,9 @@
                     <p class="card-text">{{ movie.description }}</p>
                     <p class="card-text">Rating: {{ movie.rating }} {{ (movie.rating > 1) ? 'stars' : 'star' }}</p>
                 </div>
-                <div class="card-footer text-muted">
-                    <button @click="removeMovie(index)" class="btn btn-danger btn-sm text-right">Remove</button>
+                <div class="card-footer text-muted d-flex">
+                    <button @click="editMovie(index)" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
+                    <button @click="removeMovie(index)" class="btn btn-danger btn-sm text-right"><img src="images/trashcan.svg" alt=""> Remove</button>
                 </div>
             </div>
         </section>
@@ -45,13 +49,12 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Movie</h5>
+                    <h5 class="modal-title"> {{ editMode ? 'Edit' : 'Add New' }} Movie</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="movie-title">Movie Title</label>
@@ -68,7 +71,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" v-on:click="addMovie" class="btn btn-primary">Add Movie</button>
+                    <button type="button" v-if="!editMode" v-on:click="addMovie" class="btn btn-primary"><img src="images/plus.svg" />  Add Movie</button>
+                    <button type="button" v-else v-on:click="updateMovie" class="btn btn-primary"><img src="images/pencil.svg" />  Update</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
                 </div>

@@ -3,7 +3,7 @@
 let app = new Vue({
     el: '#app',
     data: {
-      message: 'Hello Vue!',
+      message: 'A simple demonstration of the basics of VueJS!',
       flashMessage: '',
       displayFlash: false,
       isSuccess: false,
@@ -28,11 +28,14 @@ let app = new Vue({
       ],
       movieTitle: '',
       movieDescription: '',
-      movieRating: 1
+      movieRating: 1,
+      editMode: false,
+      currentlyEditing: null
     },
     methods: {
         addMovie: function() {
             // console.log('clicked')
+            this.disableEditing();
 
             let movie = {
                 title: this.movieTitle,
@@ -41,9 +44,7 @@ let app = new Vue({
             };
             // console.log(movie);
             this.movies.push(movie);
-            this.movieTitle = '';
-            this.movieDescription = '';
-            this.movieRating = 1;
+            this.clearFormFields();
             
             this.displayFlash = true;
             this.isSuccess = true;
@@ -56,6 +57,35 @@ let app = new Vue({
                 // console.log(self.displayFlash);
             }, 3000);
         },
+        editMovie: function(index) {
+            let movie = this.movies[index];
+            this.enableEditing();
+
+            // console.log(movie.title);
+            this.movieTitle = movie.title;
+            this.movieDescription = movie.description;
+            this.movieRating = movie.rating;
+            this.currentlyEditing = index;
+
+            $('#addMovieModal').modal('show');
+        },
+        updateMovie: function() {
+            let movie = {
+                title: this.movieTitle,
+                description: this.movieDescription,
+                rating: this.movieRating
+            };
+            // console.log(movie);
+            this.movies[this.currentlyEditing] = movie;
+
+            this.clearFormFields();
+            this.currentlyEditing = null;
+
+            this.displayFlash = true;
+            this.isSuccess = true;
+            this.flashMessage = 'Movie updated successfully!';
+            $('#addMovieModal').modal('hide');
+        },
         removeMovie: function(index) {
             this.displayFlash = true;
             this.isSuccess = false;
@@ -67,6 +97,17 @@ let app = new Vue({
                 self.displayFlash = false; 
                 // console.log(self.displayFlash);
             }, 3000);
+        },
+        enableEditing: function () {
+            this.editMode = true;
+        },
+        disableEditing: function () {
+            this.editMode = false;
+        },
+        clearFormFields: function() {
+            this.movieTitle = '';
+            this.movieDescription = '';
+            this.movieRating = 1;
         }
     }
 });

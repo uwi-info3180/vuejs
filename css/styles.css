@@ -12,6 +12,12 @@ header {
     grid-gap: 20px;
 }
 
+.movies .no-movies {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
 footer{
     margin-top: 20px;
 }
@@ -21,4 +27,8 @@ footer{
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+}
+
+.card-footer.d-flex {
+    justify-content: space-between;
 }
