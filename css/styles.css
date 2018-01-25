@@ -1,9 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Open+Sans:400,400i,700,700i');
+
 body {
     /* margin-top: 70px; */
+    /* background: linear-gradient(rgba(27, 6, 94, 1), rgba(255, 71, 218, 1)) */
+    font-family: 'Open Sans';
 }
 
 header {
     margin-bottom: 20px;
+}
+
+.jumbotron {
+    background: linear-gradient(rgba(27, 6, 94, 1), rgba(255, 71, 218, 1));
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.jumbotron h1 {
+    font-family: 'Bangers';
+    font-size: 56px;
+    transform: scale(1.0);
+    transition: all 0.5s ease-out;
+}
+
+.jumbotron h1:hover {
+    transform: scale(1.2);
+    /* font-size: 72px; */
+    transition: all 0.5s ease-out;
 }
 
 .movies {
@@ -18,8 +41,26 @@ header {
     text-align: center;
 }
 
-footer{
+.card {
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    /* border: 1px solid rgba(151, 151, 151, 0.3); */
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+footer {
     margin-top: 20px;
+    background: #444444;
+    padding: 25px 0;
+    color: white;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -31,4 +72,8 @@ footer{
 
 .card-footer.d-flex {
     justify-content: space-between;
+}
+
+.card-footer {
+    /* background: rgba(27, 6, 94, 1); */
 }

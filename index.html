@@ -32,11 +32,13 @@
                 You haven't added any movies.
             </div>
             <div v-for="(movie, index) in movies" class="card">
-                <img class="card-img-top" src="http://placehold.it/280x180" alt="Card image cap">
+                <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
                     <p class="card-text">{{ movie.description }}</p>
-                    <p class="card-text">Rating: {{ movie.rating }} {{ (movie.rating > 1) ? 'stars' : 'star' }}</p>
+                    <p class="card-text text-center text-muted">
+                        <img src="images/star.svg" alt="star" v-for="n in movie.rating" /> <br><small>({{ movie.rating + '/5' }} {{ (movie.rating > 1) ? 'stars' : 'star' }})</small>
+                    </p>
                 </div>
                 <div class="card-footer text-muted d-flex">
                     <button @click="editMovie(index)" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
@@ -80,7 +82,7 @@
         </div>
     </main>
 
-    <footer class="text-muted">
+    <footer class="">
         <div class="container">
             &copy; 2018 Jedi Council
         </div>
