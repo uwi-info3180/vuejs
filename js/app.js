@@ -3,7 +3,7 @@
 let app = new Vue({
     el: '#app',
     data: {
-      message: 'A simple demonstration of the basics of VueJS!',
+      message: 'A simple demo app showing the basics of VueJS!',
       flashMessage: '',
       displayFlash: false,
       isSuccess: false,
