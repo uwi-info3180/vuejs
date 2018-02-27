@@ -31,7 +31,7 @@
             <div v-if="!movies.length" class="no-movies">
                 You haven't added any movies.
             </div>
-            <div v-for="(movie, index) in movies" class="card">
+            <!-- <div v-for="(movie, index) in movies" class="card">
                 <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }}</h5>
@@ -44,7 +44,12 @@
                     <button @click="editMovie(index)" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
                     <button @click="removeMovie(index)" class="btn btn-danger btn-sm text-right"><img src="images/trashcan.svg" alt=""> Remove</button>
                 </div>
-            </div>
+            </div> -->
+            <movie-card v-for="(movie, index) in movies" 
+                        v-bind:movie="movie" 
+                        v-on:edit="editMovie(index)" 
+                        v-on:remove="removeMovie(index)">
+            </movie-card>
         </section>
 
         <div id="addMovieModal" class="modal" tabindex="-1" role="dialog">
