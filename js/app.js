@@ -1,5 +1,37 @@
 /* Movie Time App using VueJS */
 
+/* Card component*/
+Vue.component('movie-card', {
+    template: `
+    <div class="card">
+        <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">{{ movie.description }}</p>
+            <p class="card-text text-center text-muted">
+                <img src="images/star.svg" alt="star" v-for="n in movie.rating" /> <br><small>({{ movie.rating + '/5' }} {{ (movie.rating > 1) ? 'stars' : 'star' }})</small>
+            </p>
+        </div>
+        <div class="card-footer text-muted d-flex">
+            <button @click="editMovie" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
+            <button @click="removeMovie" class="btn btn-danger btn-sm text-right"><img src="images/trashcan.svg" alt=""> Remove</button>
+        </div>
+    </div>
+    `,
+    props: ['movie'],
+    data: function () {
+        return {}
+    },
+    methods: {
+        editMovie: function() {
+            this.$emit('edit');
+        },
+        removeMovie: function() {
+            this.$emit('remove');
+        }
+    }
+});
+
 let app = new Vue({
     el: '#app',
     data: {
