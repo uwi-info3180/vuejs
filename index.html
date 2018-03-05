@@ -46,7 +46,8 @@
                 </div>
             </div> -->
             <movie-card v-for="(movie, index) in movies" 
-                        v-bind:movie="movie" 
+                        v-bind:movie="movie"
+                        v-bind:key="index" 
                         v-on:edit="editMovie(index)" 
                         v-on:remove="removeMovie(index)">
             </movie-card>
