@@ -72,7 +72,7 @@ let app = new Vue({
             let movie = {
                 title: this.movieTitle,
                 description: this.movieDescription,
-                rating: this.movieRating
+                rating: parseInt(this.movieRating)
             };
             // console.log(movie);
             this.movies.push(movie);
@@ -96,7 +96,7 @@ let app = new Vue({
             // console.log(movie.title);
             this.movieTitle = movie.title;
             this.movieDescription = movie.description;
-            this.movieRating = movie.rating;
+            this.movieRating = parseInt(movie.rating);
             this.currentlyEditing = index;
 
             $('#addMovieModal').modal('show');
@@ -105,7 +105,7 @@ let app = new Vue({
             let movie = {
                 title: this.movieTitle,
                 description: this.movieDescription,
-                rating: this.movieRating
+                rating: parseInt(this.movieRating)
             };
             // console.log(movie);
             this.movies[this.currentlyEditing] = movie;
