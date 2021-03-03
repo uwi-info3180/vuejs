@@ -1,40 +1,8 @@
-/* Movie Time App using VueJS */
+// /* Movie Time App using VueJS */
 
-/* Card component*/
-Vue.component('movie-card', {
-    template: `
-    <div class="card">
-        <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">{{ movie.description }}</p>
-            <p class="card-text text-center text-muted">
-                <img src="images/star.svg" alt="star" v-for="n in movie.rating" /> <br><small>({{ movie.rating + '/5' }} {{ (movie.rating > 1) ? 'stars' : 'star' }})</small>
-            </p>
-        </div>
-        <div class="card-footer text-muted d-flex">
-            <button @click="editMovie" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
-            <button @click="removeMovie" class="btn btn-danger btn-sm text-right"><img src="images/trashcan.svg" alt=""> Remove</button>
-        </div>
-    </div>
-    `,
-    props: ['movie'],
-    data: function () {
-        return {}
-    },
-    methods: {
-        editMovie: function() {
-            this.$emit('edit');
-        },
-        removeMovie: function() {
-            this.$emit('remove');
-        }
-    }
-});
-
-let app = new Vue({
-    el: '#app',
-    data: {
+const App = Vue.createApp({
+  data() {
+    return {
       message: 'A simple demo app showing the basics of VueJS!',
       flashMessage: '',
       displayFlash: false,
@@ -63,83 +31,118 @@ let app = new Vue({
       movieRating: 1,
       editMode: false,
       currentlyEditing: null
+    }
+  },
+  methods: {
+    addMovie() {
+        // console.log('clicked')
+        this.disableEditing();
+
+        let movie = {
+            title: this.movieTitle,
+            description: this.movieDescription,
+            rating: parseInt(this.movieRating)
+        };
+        // console.log(movie);
+        this.movies.push(movie);
+        this.clearFormFields();
+        
+        this.displayFlash = true;
+        this.isSuccess = true;
+        this.flashMessage = 'Movie added successfully!';
+        $('#addMovieModal').modal('hide');
+
+        let self = this;
+        setTimeout(function() { 
+            self.displayFlash = false; 
+            // console.log(self.displayFlash);
+        }, 3000);
+    },
+    editMovie(index) {
+        let movie = this.movies[index];
+        this.enableEditing();
+
+        // console.log(movie.title);
+        this.movieTitle = movie.title;
+        this.movieDescription = movie.description;
+        this.movieRating = parseInt(movie.rating);
+        this.currentlyEditing = index;
+
+        $('#addMovieModal').modal('show');
+    },
+    updateMovie() {
+        let movie = {
+            title: this.movieTitle,
+            description: this.movieDescription,
+            rating: parseInt(this.movieRating)
+        };
+        // console.log(movie);
+        this.movies[this.currentlyEditing] = movie;
+
+        this.clearFormFields();
+        this.currentlyEditing = null;
+
+        this.displayFlash = true;
+        this.isSuccess = true;
+        this.flashMessage = 'Movie updated successfully!';
+        $('#addMovieModal').modal('hide');
+    },
+    removeMovie(index) {
+        this.displayFlash = true;
+        this.isSuccess = false;
+        this.flashMessage = 'Movie deleted!';
+        this.movies.splice(index, 1);
+
+        let self = this;
+        setTimeout(function() { 
+            self.displayFlash = false; 
+            // console.log(self.displayFlash);
+        }, 3000);
+    },
+    enableEditing() {
+        this.editMode = true;
+    },
+    disableEditing() {
+        this.editMode = false;
+    },
+    clearFormFields() {
+        this.movieTitle = '';
+        this.movieDescription = '';
+        this.movieRating = 1;
+    }
+  }
+});
+
+/* Card component*/
+App.component('movie-card', {
+    template: `
+    <div class="card">
+        <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">{{ movie.description }}</p>
+            <p class="card-text text-center text-muted">
+                <img src="images/star.svg" alt="star" v-for="n in movie.rating" /> <br><small>({{ movie.rating + '/5' }} {{ (movie.rating > 1) ? 'stars' : 'star' }})</small>
+            </p>
+        </div>
+        <div class="card-footer text-muted d-flex">
+            <button @click="editMovie" class="btn btn-primary btn-sm text-right"><img src="images/pencil.svg" alt=""> Edit</button>
+            <button @click="removeMovie" class="btn btn-danger btn-sm text-right"><img src="images/trashcan.svg" alt=""> Remove</button>
+        </div>
+    </div>
+    `,
+    props: ['movie'],
+    data() {
+        return {}
     },
     methods: {
-        addMovie: function() {
-            // console.log('clicked')
-            this.disableEditing();
-
-            let movie = {
-                title: this.movieTitle,
-                description: this.movieDescription,
-                rating: parseInt(this.movieRating)
-            };
-            // console.log(movie);
-            this.movies.push(movie);
-            this.clearFormFields();
-            
-            this.displayFlash = true;
-            this.isSuccess = true;
-            this.flashMessage = 'Movie added successfully!';
-            $('#addMovieModal').modal('hide');
-
-            let self = this;
-            setTimeout(function() { 
-                self.displayFlash = false; 
-                // console.log(self.displayFlash);
-            }, 3000);
+        editMovie() {
+            this.$emit('edit');
         },
-        editMovie: function(index) {
-            let movie = this.movies[index];
-            this.enableEditing();
-
-            // console.log(movie.title);
-            this.movieTitle = movie.title;
-            this.movieDescription = movie.description;
-            this.movieRating = parseInt(movie.rating);
-            this.currentlyEditing = index;
-
-            $('#addMovieModal').modal('show');
-        },
-        updateMovie: function() {
-            let movie = {
-                title: this.movieTitle,
-                description: this.movieDescription,
-                rating: parseInt(this.movieRating)
-            };
-            // console.log(movie);
-            this.movies[this.currentlyEditing] = movie;
-
-            this.clearFormFields();
-            this.currentlyEditing = null;
-
-            this.displayFlash = true;
-            this.isSuccess = true;
-            this.flashMessage = 'Movie updated successfully!';
-            $('#addMovieModal').modal('hide');
-        },
-        removeMovie: function(index) {
-            this.displayFlash = true;
-            this.isSuccess = false;
-            this.flashMessage = 'Movie deleted!';
-            this.movies.splice(index, 1);
-
-            let self = this;
-            setTimeout(function() { 
-                self.displayFlash = false; 
-                // console.log(self.displayFlash);
-            }, 3000);
-        },
-        enableEditing: function () {
-            this.editMode = true;
-        },
-        disableEditing: function () {
-            this.editMode = false;
-        },
-        clearFormFields: function() {
-            this.movieTitle = '';
-            this.movieDescription = '';
-            this.movieRating = 1;
+        removeMovie() {
+            this.$emit('remove');
         }
     }
 });
+
+App.mount('#app');
