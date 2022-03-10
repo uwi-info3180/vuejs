@@ -52,6 +52,14 @@ header {
     /* border: 1px solid rgba(151, 151, 151, 0.3); */
 }
 
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
 .card-title {
     font-weight: bold;
 }

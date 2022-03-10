@@ -3,7 +3,7 @@
 const App = Vue.createApp({
   data() {
     return {
-      message: 'A simple demo app showing the basics of VueJS!',
+      message: 'A cool demo app showing the basics of VueJS!',
       flashMessage: '',
       displayFlash: false,
       isSuccess: false,
@@ -24,7 +24,12 @@ const App = Vue.createApp({
                 title: 'Wonder Woman',
                 description: 'When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.',
                 rating: 5
-            },            
+            },
+            {
+                title: 'Black Panther',
+                description: "T'Challa, heir to the hidden but advanced kingdom of Wakanda, must step forward to lead his people into a new future and must confront a challenger from his country's past.",
+                rating: 5
+            }            
       ],
       movieTitle: '',
       movieDescription: '',
@@ -50,7 +55,8 @@ const App = Vue.createApp({
         this.displayFlash = true;
         this.isSuccess = true;
         this.flashMessage = 'Movie added successfully!';
-        $('#addMovieModal').modal('hide');
+        const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
+        addMovieModal.hide();
 
         let self = this;
         setTimeout(function() { 
@@ -68,7 +74,8 @@ const App = Vue.createApp({
         this.movieRating = parseInt(movie.rating);
         this.currentlyEditing = index;
 
-        $('#addMovieModal').modal('show');
+        const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
+        addMovieModal.show();
     },
     updateMovie() {
         let movie = {
@@ -85,7 +92,9 @@ const App = Vue.createApp({
         this.displayFlash = true;
         this.isSuccess = true;
         this.flashMessage = 'Movie updated successfully!';
-        $('#addMovieModal').modal('hide');
+        
+        const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
+        addMovieModal.hide();
     },
     removeMovie(index) {
         this.displayFlash = true;
@@ -117,10 +126,12 @@ const App = Vue.createApp({
 App.component('movie-card', {
     template: `
     <div class="card">
-        <img class="card-img-top" src="http://placehold.it/280x180?text=Placeholder+Image" alt="Card image cap">
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image</text></svg>
         <div class="card-body">
             <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">{{ movie.description }}</p>
+            <p class="card-text">
+                {{ movie.description }}
+            </p>
             <p class="card-text text-center text-muted">
                 <img src="images/star.svg" alt="star" v-for="n in movie.rating" /> <br><small>({{ movie.rating + '/5' }} {{ (movie.rating > 1) ? 'stars' : 'star' }})</small>
             </p>
@@ -133,7 +144,8 @@ App.component('movie-card', {
     `,
     props: ['movie'],
     data() {
-        return {}
+        return {
+        }
     },
     methods: {
         editMovie() {
