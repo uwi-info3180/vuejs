@@ -55,6 +55,8 @@ const App = Vue.createApp({
         this.displayFlash = true;
         this.isSuccess = true;
         this.flashMessage = 'Movie added successfully!';
+
+        // Hide Bootstrap Modal
         const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
         addMovieModal.hide();
 
@@ -74,6 +76,7 @@ const App = Vue.createApp({
         this.movieRating = parseInt(movie.rating);
         this.currentlyEditing = index;
 
+        // Show Bootstrap Modal
         const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
         addMovieModal.show();
     },
@@ -92,7 +95,8 @@ const App = Vue.createApp({
         this.displayFlash = true;
         this.isSuccess = true;
         this.flashMessage = 'Movie updated successfully!';
-        
+
+        // Hide Bootstrap Modal
         const addMovieModal = bootstrap.Modal.getInstance(document.querySelector('#addMovieModal'));
         addMovieModal.hide();
     },
